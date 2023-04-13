@@ -19,7 +19,7 @@ function TimezoneConverter() {
 
   useEffect(() => {
     axios
-      .get("http://worldtimeapi.org/api/timezone")
+      .get("https://worldtimeapi.org/api/timezone")
       .then((response) => {
         setTimezones(response.data);
       })
