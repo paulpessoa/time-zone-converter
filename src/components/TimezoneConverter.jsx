@@ -79,17 +79,14 @@ function TimezoneConverter() {
       </FormControl>
       <FormControl mt="4">
         <FormLabel>Horário {isLocalTime ? `em ${selectedTimezone}` : "em seu local"}</FormLabel>
-        <Input type="datetime-local" onChange={handleLocalTimeChange} />
+        <Input type="datetime-local" onChange={handleLocalTimeChange}/>
       </FormControl>
-
-      {selectedTimezone ?
-        <Box mt="4">
-          <Button onClick={handleToggleClick}> {isLocalTime ? "Horário em seu local" :  `Horário em ${selectedTimezone}`} </Button>
-            <Box>{getConvertedTime()}</Box>
-          
+    { isLocalTime && selectedTimezone ? ( 
+      <Box mt="4">
+        <Button onClick={handleToggleClick}> {isLocalTime ? "Horário em seu local" :  `Horário em ${selectedTimezone}`} </Button>
+          <Box>{getConvertedTime()}</Box>
         </Box>
-      : null
-      }
+          ): ""} 
     </Box>
   );
 }
