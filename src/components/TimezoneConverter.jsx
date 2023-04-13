@@ -37,9 +37,9 @@ function TimezoneConverter() {
 
   const handleToggleClick = () => {
     setIsLocalTime(!isLocalTime);
-  }; 
-    
-  
+  };
+
+
   const getConvertedTime = () => {
     const format = "MMMM Do YYYY, h:mm:ss a";
     if (isLocalTime) {
@@ -60,7 +60,7 @@ function TimezoneConverter() {
       }
     }
   };
-  
+
 
 
 
@@ -68,11 +68,7 @@ function TimezoneConverter() {
   return (
     <Box p="4">
       <FormControl>
-        <FormLabel>Horário {isLocalTime ? "no outro país" : "local"}</FormLabel>
-        <Input type="datetime-local" onChange={handleLocalTimeChange} />
-      </FormControl>
-      <FormControl>
-        <FormLabel>Fuso Horário do outro país</FormLabel>
+        <FormLabel>Escolha o país</FormLabel>
         <Select value={selectedTimezone} onChange={handleTimezoneChange}>
           {timezones.map((timezone) => (
             <option key={timezone} value={timezone}>
@@ -81,15 +77,19 @@ function TimezoneConverter() {
           ))}
         </Select>
       </FormControl>
-      <Box mt="4">
-        <Button onClick={handleToggleClick}>
-          {isLocalTime ? "Horário Remoto" : "Horário Local"}
-        </Button>
-        <Box mt="8">
-          <Box fontWeight="bold">   {!isLocalTime ? "Horário Remoto" : "Horário Local"}</Box>
-          <Box>{getConvertedTime()}</Box>
+      <FormControl mt="4">
+        <FormLabel>Horário {isLocalTime ? `em ${selectedTimezone}` : "em seu local"}</FormLabel>
+        <Input type="datetime-local" onChange={handleLocalTimeChange} />
+      </FormControl>
+
+      {selectedTimezone ?
+        <Box mt="4">
+          <Button onClick={handleToggleClick}> {isLocalTime ? "Horário em seu local" :  `Horário em ${selectedTimezone}`} </Button>
+            <Box>{getConvertedTime()}</Box>
+          
         </Box>
-      </Box>
+      : null
+      }
     </Box>
   );
 }
