@@ -6,6 +6,7 @@ import {
   FormLabel,
   Input,
   Select,
+  Text,
 } from "@chakra-ui/react";
 import moment from "moment-timezone";
 import axios from "axios";
@@ -70,23 +71,26 @@ function TimezoneConverter() {
       <FormControl>
         <FormLabel>Escolha o país</FormLabel>
         <Select value={selectedTimezone} onChange={handleTimezoneChange}>
-          {timezones.map((timezone) => (
-            <option key={timezone} value={timezone}>
-              {timezone}
-            </option>
-          ))}
-        </Select>
+  <option value="">Selecionar</option>
+  {timezones.map((timezone) => (
+    <option key={timezone} value={timezone}>
+      {timezone}
+    </option>
+  ))}
+</Select>
       </FormControl>
       <FormControl mt="4">
         <FormLabel>Horário {isLocalTime ? `em ${selectedTimezone}` : "em seu local"}</FormLabel>
         <Input type="datetime-local" onChange={handleLocalTimeChange}/>
       </FormControl>
-    { isLocalTime && selectedTimezone ? ( 
+
       <Box mt="4">
-        <Button onClick={handleToggleClick}> {isLocalTime ? "Horário em seu local" :  `Horário em ${selectedTimezone}`} </Button>
-          <Box>{getConvertedTime()}</Box>
+
+          <Text as='b'>{getConvertedTime()}</Text>
+          <Text fontSize='sm'> ( {isLocalTime ? "Horário em seu local" :  `Horário em ${selectedTimezone}`} )</Text>
+
         </Box>
-          ): ""} 
+          <Button disabled mt="8" onClick={handleToggleClick}>Inverter</Button>
     </Box>
   );
 }
